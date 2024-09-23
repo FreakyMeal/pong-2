@@ -5,8 +5,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_vvil2"]
 radius = 20.0
 
-[node name="Ball" type="RigidBody2D"]
-gravity_scale = 0.0
+[node name="Ball" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_b54up")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -24,5 +24,3 @@ grow_vertical = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vvil2")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

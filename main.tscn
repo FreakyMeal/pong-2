@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c12rklcrref2h"]
+[gd_scene load_steps=11 format=3 uid="uid://c12rklcrref2h"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_bdu3u"]
 [ext_resource type="PackedScene" uid="uid://dvs35jxcm5vhl" path="res://player.tscn" id="1_jm2y8"]
@@ -9,6 +9,20 @@ colors = PackedColorArray(0.114194, 0.183862, 0.411661, 0.235294, 0, 0, 0, 0.329
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_qqmix"]
 gradient = SubResource("Gradient_ml3nq")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_gwjmx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xudry"]
+size = Vector2(12.8, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lepwk"]
+size = Vector2(10.6667, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lntmd"]
+size = Vector2(10, 732)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vtn5c"]
+size = Vector2(72, 755)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_bdu3u")
@@ -22,4 +36,27 @@ texture = SubResource("GradientTexture1D_qqmix")
 [node name="Ball" parent="." instance=ExtResource("3_i8ia0")]
 position = Vector2(593, 320)
 
-[connection signal="collided" from="Ball" to="." method="_on_ball_collided"]
+[node name="Wall" type="Area2D" parent="."]
+
+[node name="WallSprite" type="Sprite2D" parent="Wall"]
+position = Vector2(640, -10)
+scale = Vector2(1280, 20)
+texture = SubResource("CanvasTexture_gwjmx")
+
+[node name="WallCollisionTop" type="CollisionShape2D" parent="Wall"]
+position = Vector2(640, -10)
+scale = Vector2(100, 1)
+shape = SubResource("RectangleShape2D_xudry")
+
+[node name="WallCollisionBottom" type="CollisionShape2D" parent="Wall"]
+position = Vector2(640, 740)
+scale = Vector2(120, 1)
+shape = SubResource("RectangleShape2D_lepwk")
+
+[node name="WallCollisionLeft" type="CollisionShape2D" parent="Wall"]
+position = Vector2(-5, 356)
+shape = SubResource("RectangleShape2D_lntmd")
+
+[node name="WallCollisionRight" type="CollisionShape2D" parent="Wall"]
+position = Vector2(1316, 367.5)
+shape = SubResource("RectangleShape2D_vtn5c")

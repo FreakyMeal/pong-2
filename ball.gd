@@ -1,20 +1,18 @@
-extends RigidBody2D
+extends CharacterBody2D
 
-var speed = 1000
-var direction = Vector2.ZERO
-
-signal collided
+var speed = 350
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	position = Vector2(512, 300)  # Centre du terrain, par exemple
-	#var random_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
-	#direction = random_direction
-	direction = Vector2.LEFT
+	position = Vector2(512, 300)  # Centre du terrain
+	var random_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * speed
+	velocity = random_direction
+
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	apply_impulse(Vector2.RIGHT, Vector2.RIGHT * speed * delta)
-
-func _on_body_entered(body: Node) -> void:
-	collided.emit(body)
+func _physics_process(delta: float) -> void:
+	var collision = move_and_collide(velocity * get_process_delta_time())
+	print(str(collision))
+	if collision:
+		velocity = velocity.bounce(collision.get_normal())
