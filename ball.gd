@@ -1,21 +1,20 @@
 extends RigidBody2D
 
-var speed = 300
-var velocity = Vector2.ZERO
+var speed = 1000
+var direction = Vector2.ZERO
+
+signal collided
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	start_ball()
+	position = Vector2(512, 300)  # Centre du terrain, par exemple
+	#var random_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
+	#direction = random_direction
+	direction = Vector2.LEFT
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	move_ball()
+	apply_impulse(Vector2.RIGHT, Vector2.RIGHT * speed * delta)
 
-func start_ball():
-	position = Vector2(512, 300)  # Centre du terrain, par exemple
-	var random_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
-	velocity = random_direction
-
-func move_ball():
-	velocity = velocity.normalized() * speed
-	var collision = move_and_collide(velocity * get_process_delta_time())
+func _on_body_entered(body: Node) -> void:
+	collided.emit(body)

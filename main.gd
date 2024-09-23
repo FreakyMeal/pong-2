@@ -34,6 +34,5 @@ func set_players():
 	add_child(player1)
 	add_child(player2)
 
-
-func _on_ball_body_entered(body: Node) -> void:
-	pass # Replace with function body.
+func _on_ball_collided() -> void:
+	$Ball.direction = Vector2.UP

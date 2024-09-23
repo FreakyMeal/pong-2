@@ -22,4 +22,4 @@ texture = SubResource("GradientTexture1D_qqmix")
 [node name="Ball" parent="." instance=ExtResource("3_i8ia0")]
 position = Vector2(593, 320)
 
-[connection signal="body_entered" from="Ball" to="." method="_on_ball_body_entered"]
+[connection signal="collided" from="Ball" to="." method="_on_ball_collided"]
