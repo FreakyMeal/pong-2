@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed:int = 300
+var speed:int = 400
 var direction: = Vector2.ZERO
 
 var up_key:String = ""

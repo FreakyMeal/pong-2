@@ -10,6 +10,9 @@ colors = PackedColorArray(0.114194, 0.183862, 0.411661, 0.235294, 0, 0, 0, 0.329
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_qqmix"]
 gradient = SubResource("Gradient_ml3nq")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1lhri"]
+size = Vector2(14, 720)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xudry"]
 size = Vector2(12.8, 20)
 
@@ -18,9 +21,6 @@ size = Vector2(10.6667, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c07i3"]
 size = Vector2(40, 720)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1lhri"]
-size = Vector2(14, 720)
 
 [node name="Main" type="Node2D"]
 light_mask = 3
@@ -32,6 +32,40 @@ player = ExtResource("1_jm2y8")
 offset_right = 1280.0
 offset_bottom = 720.0
 texture = SubResource("GradientTexture1D_qqmix")
+
+[node name="P1Score" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.0784314)
+offset_left = 178.0
+offset_top = 19.0
+offset_right = 463.0
+offset_bottom = 701.0
+theme_override_font_sizes/font_size = 500
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="P2Score" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.0784314)
+offset_left = 817.0
+offset_top = 19.0
+offset_right = 1102.0
+offset_bottom = 701.0
+theme_override_font_sizes/font_size = 500
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedCheck" type="Area2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="SpeedCheck"]
+offset_left = 633.0
+offset_right = 647.0
+offset_bottom = 720.0
+color = Color(0.151276, 0.151276, 0.151276, 0.415686)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpeedCheck"]
+position = Vector2(640, 360)
+shape = SubResource("RectangleShape2D_1lhri")
 
 [node name="Ball" parent="." instance=ExtResource("3_i8ia0")]
 position = Vector2(1100, 277)
@@ -48,26 +82,18 @@ position = Vector2(640, 740)
 scale = Vector2(120, 1)
 shape = SubResource("RectangleShape2D_lepwk")
 
-[node name="GoalZone" type="Area2D" parent="."]
+[node name="LeftGoalZone" type="Area2D" parent="."]
 
-[node name="LeftZone" type="CollisionShape2D" parent="GoalZone"]
+[node name="LeftZone" type="CollisionShape2D" parent="LeftGoalZone"]
 position = Vector2(-20, 360)
 shape = SubResource("RectangleShape2D_c07i3")
 
-[node name="RightZone" type="CollisionShape2D" parent="GoalZone"]
+[node name="RightGoalZone" type="Area2D" parent="."]
+
+[node name="RightZone" type="CollisionShape2D" parent="RightGoalZone"]
 position = Vector2(1300, 360)
 shape = SubResource("RectangleShape2D_c07i3")
 
-[node name="SpeedCheck" type="Area2D" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="SpeedCheck"]
-offset_left = 633.0
-offset_right = 647.0
-offset_bottom = 720.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpeedCheck"]
-position = Vector2(640, 360)
-shape = SubResource("RectangleShape2D_1lhri")
-
-[connection signal="body_entered" from="GoalZone" to="." method="_on_goal_zone_body_entered"]
 [connection signal="body_entered" from="SpeedCheck" to="." method="_on_speed_check_body_entered"]
+[connection signal="body_entered" from="LeftGoalZone" to="." method="_on_left_goal_zone_body_entered"]
+[connection signal="body_entered" from="RightGoalZone" to="." method="_on_right_goal_zone_body_entered"]
