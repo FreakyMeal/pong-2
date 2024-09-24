@@ -26,7 +26,8 @@ size = Vector2(40, 720)
 light_mask = 3
 visibility_layer = 3
 script = ExtResource("1_bdu3u")
-player = ExtResource("1_jm2y8")
+player_scene = ExtResource("1_jm2y8")
+ball_scene = ExtResource("3_i8ia0")
 
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 1280.0
@@ -67,9 +68,6 @@ color = Color(0.151276, 0.151276, 0.151276, 0.415686)
 position = Vector2(640, 360)
 shape = SubResource("RectangleShape2D_1lhri")
 
-[node name="Ball" parent="." instance=ExtResource("3_i8ia0")]
-position = Vector2(1100, 277)
-
 [node name="Wall" type="StaticBody2D" parent="."]
 
 [node name="WallCollisionTop" type="CollisionShape2D" parent="Wall"]
@@ -94,6 +92,25 @@ shape = SubResource("RectangleShape2D_c07i3")
 position = Vector2(1300, 360)
 shape = SubResource("RectangleShape2D_c07i3")
 
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 481.0
+offset_top = 314.0
+offset_right = 799.0
+offset_bottom = 407.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 40
+text = "START GAME"
+icon_alignment = 1
+
 [connection signal="body_entered" from="SpeedCheck" to="." method="_on_speed_check_body_entered"]
 [connection signal="body_entered" from="LeftGoalZone" to="." method="_on_left_goal_zone_body_entered"]
 [connection signal="body_entered" from="RightGoalZone" to="." method="_on_right_goal_zone_body_entered"]
+[connection signal="pressed" from="StartButton" to="." method="_on_button_pressed"]
