@@ -33,6 +33,8 @@ offset_right = 1280.0
 offset_bottom = 720.0
 texture = SubResource("GradientTexture1D_qqmix")
 
+[node name="UI" parent="." instance=ExtResource("4_xw2bl")]
+
 [node name="SpeedCheck" type="Area2D" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="SpeedCheck"]
@@ -69,14 +71,6 @@ shape = SubResource("RectangleShape2D_c07i3")
 position = Vector2(1300, 360)
 shape = SubResource("RectangleShape2D_c07i3")
 
-[node name="UI" parent="." instance=ExtResource("4_xw2bl")]
-offset_left = 640.0
-offset_top = 360.0
-offset_right = 640.0
-offset_bottom = 360.0
-
 [connection signal="body_entered" from="SpeedCheck" to="." method="_on_speed_check_body_entered"]
 [connection signal="body_entered" from="LeftGoalZone" to="." method="_on_left_goal_zone_body_entered"]
 [connection signal="body_entered" from="RightGoalZone" to="." method="_on_right_goal_zone_body_entered"]
-[connection signal="countdown_finished" from="UI" to="." method="_on_ui_countdown_finished"]
-[connection signal="start_button_pressed" from="UI" to="." method="_on_ui_start_button_pressed"]

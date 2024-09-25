@@ -3,13 +3,8 @@ extends Node2D
 @export var player_scene: PackedScene
 @export var ball_scene: PackedScene
 
-var direction:Vector2 = Vector2(1,0)
-
 const P1_START_POSITION:Vector2 = Vector2(10,307)
 const P2_START_POSITION:Vector2 = Vector2(1270,455)
-
-var p1_score: int = 0
-var p2_score: int = 0
 
 var ball_acceleration: int = 50
 
@@ -18,8 +13,7 @@ func _ready() -> void:
 	reset()
 
 func _process(_delta: float) -> void:
-	$P1Score.text = str(p1_score)
-	$P2Score.text = str(p2_score)
+	pass
 
 
 func reset():
@@ -43,14 +37,18 @@ func set_players():
 
 
 func reset_score():
-	p1_score = 0
-	p2_score = 0
+	$UI.p1_score = 0
+	$UI.p2_score = 0
 
 func start_game():
 	var ball = ball_scene.instantiate()
 	ball.position = Vector2(640, 360)  # Field center
 	ball.velocity = Vector2(randf_range(-1, 1), randf_range(-0.1, 0.1)).normalized() # Ball starts with a random direction
 	add_child(ball)
+	
+	await get_tree().create_timer(1.0).timeout
+
+
 
 func _on_speed_check_body_entered(_body: Node2D) -> void:
 	if is_instance_valid($Ball):
@@ -60,15 +58,32 @@ func _on_speed_check_body_entered(_body: Node2D) -> void:
 func _on_left_goal_zone_body_entered(body: Node2D) -> void:
 	if body == $Ball:
 		$Ball.queue_free()
-		p2_score += 1
-
+		$UI.p2_score += 1
+		await get_tree().create_timer(0.6).timeout
+		$UI.start_countdown()
+		
+		#A IMPLEMENTER
+		#$UI/WinText.text = "PLAYER 2 WINS!"
+		#await get_tree().create_timer(1.0).timeout
+		#reset()
+		#$UI/StartButton.show()
 
 func _on_right_goal_zone_body_entered(body: Node2D) -> void:
 	if body == $Ball:
 		$Ball.queue_free()
-		p1_score += 1
+		$UI.p1_score += 1
+		await get_tree().create_timer(0.6).timeout
+		$UI.start_countdown()
+		
+		#A IMPLEMENTER
+		#$UI/WinText.text = "PLAYER 1 WINS!"
+		#await get_tree().create_timer(1.0).timeout
+		#reset()
+		#$UI/StartButton.show()
 
+func _on_ui_start_button_pressed() -> void:
+	$UI/WinText.hide()
+	$UI.start_countdown()
 
-func _on_button_pressed() -> void:
+func _on_ui_countdown_finished() -> void:
 	start_game()
-	$StartButton.hide()
