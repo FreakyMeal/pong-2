@@ -3,11 +3,12 @@ extends Node2D
 @export var player_scene: PackedScene
 @export var ball_scene: PackedScene
 
-const P1_START_POSITION:Vector2 = Vector2(10,307)
-const P2_START_POSITION:Vector2 = Vector2(1270,455)
+const P1_START_POSITION:= Vector2(10,307)
+const P2_START_POSITION: = Vector2(1270,455)
 
 var ball_acceleration: int = 50
 
+var ball = null
 
 func _ready() -> void:
 	reset()
@@ -41,7 +42,7 @@ func reset_score():
 	$UI.p2_score = 0
 
 func start_game():
-	var ball = ball_scene.instantiate()
+	ball = ball_scene.instantiate()
 	ball.position = Vector2(640, 360)  # Field center
 	ball.velocity = Vector2(randf_range(-1, 1), randf_range(-0.1, 0.1)).normalized() # Ball starts with a random direction
 	add_child(ball)
@@ -51,13 +52,12 @@ func start_game():
 
 
 func _on_speed_check_body_entered(_body: Node2D) -> void:
-	if is_instance_valid($Ball):
-		$Ball.speed += ball_acceleration
-
+	if is_instance_valid(ball):
+		ball.speed += ball_acceleration
 
 func _on_left_goal_zone_body_entered(body: Node2D) -> void:
-	if body == $Ball:
-		$Ball.queue_free()
+	if body == ball:
+		ball.queue_free()
 		$UI.p2_score += 1
 		await get_tree().create_timer(0.6).timeout
 		$UI.start_countdown()
@@ -69,8 +69,8 @@ func _on_left_goal_zone_body_entered(body: Node2D) -> void:
 		#$UI/StartButton.show()
 
 func _on_right_goal_zone_body_entered(body: Node2D) -> void:
-	if body == $Ball:
-		$Ball.queue_free()
+	if body == ball:
+		ball.queue_free()
 		$UI.p1_score += 1
 		await get_tree().create_timer(0.6).timeout
 		$UI.start_countdown()
