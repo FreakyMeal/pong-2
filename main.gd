@@ -60,32 +60,33 @@ func _on_speed_check_body_entered(_body: Node2D) -> void:
 		ball.speed += ball_acceleration
 
 func _on_left_goal_zone_body_entered(body: Node2D) -> void:
-	if body == ball and $UI.p2_score < 4:
-		ball.queue_free()
-		$UI.p2_score += 1
-		await get_tree().create_timer(0.6).timeout
-		$UI.start_countdown()
-	elif body == ball:
+	if body == ball:
 		$UI.p2_score += 1
 		ball.queue_free()
-		$UI/TextDisplay.text = "PLAYER 2 WINS!"
-		$UI/TextDisplay.show()
-		await get_tree().create_timer(1.0).timeout
-		$UI/StartButton.show()
+		
+		if $UI.p2_score >= 5:
+			$UI/TextDisplay.text = "PLAYER 2 WINS!"
+			$UI/TextDisplay.show()
+			await get_tree().create_timer(1.0).timeout
+			$UI/StartButton.show()
+		else:
+			await get_tree().create_timer(0.6).timeout
+			$UI.start_countdown()
+
 
 func _on_right_goal_zone_body_entered(body: Node2D) -> void:
-	if body == ball and $UI.p1_score < 4:
-		ball.queue_free()
+	if body == ball:
 		$UI.p1_score += 1
-		await get_tree().create_timer(0.6).timeout
-		$UI.start_countdown()
-	elif body == ball:
-		$UI.p2_score += 1
 		ball.queue_free()
-		$UI/TextDisplay.text = "PLAYER 1 WINS!"
-		$UI/TextDisplay.show()
-		await get_tree().create_timer(1.0).timeout
-		$UI/StartButton.show()
+		
+		if $UI.p1_score >= 5:
+			$UI/TextDisplay.text = "PLAYER 1 WINS!"
+			$UI/TextDisplay.show()
+			await get_tree().create_timer(1.0).timeout
+			$UI/StartButton.show()
+		else:
+			await get_tree().create_timer(0.6).timeout
+			$UI.start_countdown()
 
 
 func _on_ui_start_button_pressed() -> void:

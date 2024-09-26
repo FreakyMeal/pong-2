@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bq0nfj75vbkdv"
-path="res://.godot/imported/guillian.png-0e64e7ff3fb094061ce726721680420b.ctex"
+uid="uid://dgj5xw2fu5wxo"
+path="res://.godot/imported/ball.png-3c192cd2cc38e3f64d883b1fd3a31784.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://guillian.png"
-dest_files=["res://.godot/imported/guillian.png-0e64e7ff3fb094061ce726721680420b.ctex"]
+source_file="res://icons/ball.png"
+dest_files=["res://.godot/imported/ball.png-3c192cd2cc38e3f64d883b1fd3a31784.ctex"]
 
 [params]
 
