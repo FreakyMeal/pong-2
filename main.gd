@@ -23,6 +23,8 @@ func reset():
 	get_tree().call_group("players", "queue_free")
 	set_players()
 	reset_score()
+	$UI/TextDisplay.show()
+	$UI/TextDisplay.text = "First to 5 wins"
 
 func set_players():
 	player1 = player_scene.instantiate()
@@ -66,10 +68,9 @@ func _on_left_goal_zone_body_entered(body: Node2D) -> void:
 	elif body == ball:
 		$UI.p2_score += 1
 		ball.queue_free()
-		$UI/WinText.text = "PLAYER 2 WINS!"
-		$UI/WinText.show()
+		$UI/TextDisplay.text = "PLAYER 2 WINS!"
+		$UI/TextDisplay.show()
 		await get_tree().create_timer(1.0).timeout
-		reset()
 		$UI/StartButton.show()
 
 func _on_right_goal_zone_body_entered(body: Node2D) -> void:
@@ -81,15 +82,15 @@ func _on_right_goal_zone_body_entered(body: Node2D) -> void:
 	elif body == ball:
 		$UI.p2_score += 1
 		ball.queue_free()
-		$UI/WinText.text = "PLAYER 1 WINS!"
-		$UI/WinText.show()
+		$UI/TextDisplay.text = "PLAYER 1 WINS!"
+		$UI/TextDisplay.show()
 		await get_tree().create_timer(1.0).timeout
-		reset()
 		$UI/StartButton.show()
 
 
 func _on_ui_start_button_pressed() -> void:
-	$UI/WinText.hide()
+	reset_score()
+	$UI/TextDisplay.hide()
 	$UI.start_countdown()
 
 func _on_ui_countdown_finished() -> void:

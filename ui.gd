@@ -20,7 +20,11 @@ func _process(_delta: float) -> void:
 func _on_start_button_pressed() -> void:
 	start_button_pressed.emit()
 	$StartButton.hide()
-	$WinText.hide()
+	$TextDisplay.hide()
+	$SpriteZ.hide()
+	$SpriteS.hide()
+	$SpriteUP.hide()
+	$SpriteDOWN.hide()
 
 func start_countdown():
 	$StartTimer.show()
