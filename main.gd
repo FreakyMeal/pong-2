@@ -9,6 +9,8 @@ const P2_START_POSITION: = Vector2(1270,455)
 var ball_acceleration: int = 50
 
 var ball = null
+var player1 = null
+var player2 = null
 
 func _ready() -> void:
 	reset()
@@ -23,12 +25,12 @@ func reset():
 	reset_score()
 
 func set_players():
-	var player1 = player_scene.instantiate()
+	player1 = player_scene.instantiate()
 	player1.position = P1_START_POSITION
 	player1.up_key = "up_player_1"
 	player1.down_key = "down_player_1"
 	
-	var player2 = player_scene.instantiate()
+	player2 = player_scene.instantiate()
 	player2.position = P2_START_POSITION
 	player2.up_key = "up_player_2"
 	player2.down_key = "down_player_2"
@@ -56,30 +58,35 @@ func _on_speed_check_body_entered(_body: Node2D) -> void:
 		ball.speed += ball_acceleration
 
 func _on_left_goal_zone_body_entered(body: Node2D) -> void:
-	if body == ball:
+	if body == ball and $UI.p2_score < 4:
 		ball.queue_free()
 		$UI.p2_score += 1
 		await get_tree().create_timer(0.6).timeout
 		$UI.start_countdown()
-		
-		#A IMPLEMENTER
-		#$UI/WinText.text = "PLAYER 2 WINS!"
-		#await get_tree().create_timer(1.0).timeout
-		#reset()
-		#$UI/StartButton.show()
+	elif body == ball:
+		$UI.p2_score += 1
+		ball.queue_free()
+		$UI/WinText.text = "PLAYER 2 WINS!"
+		$UI/WinText.show()
+		await get_tree().create_timer(1.0).timeout
+		reset()
+		$UI/StartButton.show()
 
 func _on_right_goal_zone_body_entered(body: Node2D) -> void:
-	if body == ball:
+	if body == ball and $UI.p1_score < 4:
 		ball.queue_free()
 		$UI.p1_score += 1
 		await get_tree().create_timer(0.6).timeout
 		$UI.start_countdown()
-		
-		#A IMPLEMENTER
-		#$UI/WinText.text = "PLAYER 1 WINS!"
-		#await get_tree().create_timer(1.0).timeout
-		#reset()
-		#$UI/StartButton.show()
+	elif body == ball:
+		$UI.p2_score += 1
+		ball.queue_free()
+		$UI/WinText.text = "PLAYER 1 WINS!"
+		$UI/WinText.show()
+		await get_tree().create_timer(1.0).timeout
+		reset()
+		$UI/StartButton.show()
+
 
 func _on_ui_start_button_pressed() -> void:
 	$UI/WinText.hide()
