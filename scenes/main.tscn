@@ -1,15 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://ca6tvrxxsvk02"]
+[gd_scene load_steps=10 format=3 uid="uid://ca6tvrxxsvk02"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_bdu3u"]
 [ext_resource type="PackedScene" uid="uid://spvon7oskija" path="res://scenes/player.tscn" id="1_jm2y8"]
 [ext_resource type="PackedScene" uid="uid://b8uw1tqvekdhu" path="res://scenes/ball.tscn" id="3_i8ia0"]
+[ext_resource type="Texture2D" uid="uid://bk6ou7hpvcxwj" path="res://assets/background.png" id="4_sbcyb"]
 [ext_resource type="PackedScene" uid="uid://c6747rmads7nb" path="res://scenes/UI.tscn" id="4_xw2bl"]
-
-[sub_resource type="Gradient" id="Gradient_ml3nq"]
-colors = PackedColorArray(0.114194, 0.183862, 0.411661, 0.235294, 0, 0, 0, 0.329412)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_qqmix"]
-gradient = SubResource("Gradient_ml3nq")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1lhri"]
 size = Vector2(14, 720)
@@ -29,9 +24,12 @@ player_scene = ExtResource("1_jm2y8")
 ball_scene = ExtResource("3_i8ia0")
 
 [node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.411765, 0.411765, 0.411765, 0.627451)
 offset_right = 1280.0
 offset_bottom = 720.0
-texture = SubResource("GradientTexture1D_qqmix")
+texture = ExtResource("4_sbcyb")
+expand_mode = 2
+flip_h = true
 
 [node name="SpeedCheck" type="Area2D" parent="."]
 

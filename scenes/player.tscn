@@ -6,6 +6,7 @@
 size = Vector2(20, 150)
 
 [node name="Player" type="CharacterBody2D" groups=["players"]]
+motion_mode = 1
 script = ExtResource("1_xf3o8")
 
 [node name="ColorRect" type="ColorRect" parent="."]

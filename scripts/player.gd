@@ -9,7 +9,7 @@ var hold_key:String = ""
 
 var is_holding_ball:bool = false
 
-#signal ball_captured
+signal hold_key_pressed
 
 func _process(delta: float) -> void:
 	move_and_collide(velocity * delta)
@@ -21,5 +21,5 @@ func _process(delta: float) -> void:
 		direction = Vector2.DOWN
 		position += direction * speed * delta
 	
-	#if Input.is_action_just_pressed(hold_key):
-		#ball_captured.emit()
+	if Input.is_action_just_pressed(hold_key):
+		hold_key_pressed.emit()

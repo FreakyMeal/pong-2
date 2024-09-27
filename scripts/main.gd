@@ -31,11 +31,13 @@ func set_players():
 	player1.position = P1_START_POSITION
 	player1.up_key = "up_player_1"
 	player1.down_key = "down_player_1"
+	player1.hold_key = "hold_player_1"
 	
 	player2 = player_scene.instantiate()
 	player2.position = P2_START_POSITION
 	player2.up_key = "up_player_2"
 	player2.down_key = "down_player_2"
+	player2.hold_key = "hold_player_2"
 	
 	add_child(player1)
 	add_child(player2)
