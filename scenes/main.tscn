@@ -1,13 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://ca6tvrxxsvk02"]
+[gd_scene load_steps=8 format=3 uid="uid://ca6tvrxxsvk02"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_bdu3u"]
-[ext_resource type="PackedScene" uid="uid://spvon7oskija" path="res://scenes/player.tscn" id="1_jm2y8"]
-[ext_resource type="PackedScene" uid="uid://b8uw1tqvekdhu" path="res://scenes/ball.tscn" id="3_i8ia0"]
 [ext_resource type="Texture2D" uid="uid://bk6ou7hpvcxwj" path="res://assets/background.png" id="4_sbcyb"]
+[ext_resource type="PackedScene" uid="uid://spvon7oskija" path="res://scenes/player.tscn" id="4_vvwy1"]
 [ext_resource type="PackedScene" uid="uid://c6747rmads7nb" path="res://scenes/UI.tscn" id="4_xw2bl"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1lhri"]
-size = Vector2(14, 720)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xudry"]
 size = Vector2(12.8, 20)
@@ -20,8 +16,6 @@ size = Vector2(40, 720)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_bdu3u")
-player_scene = ExtResource("1_jm2y8")
-ball_scene = ExtResource("3_i8ia0")
 
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color(0.411765, 0.411765, 0.411765, 0.627451)
@@ -30,18 +24,6 @@ offset_bottom = 720.0
 texture = ExtResource("4_sbcyb")
 expand_mode = 2
 flip_h = true
-
-[node name="SpeedCheck" type="Area2D" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="SpeedCheck"]
-offset_left = 633.0
-offset_right = 647.0
-offset_bottom = 720.0
-color = Color(0.151276, 0.151276, 0.151276, 0.415686)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpeedCheck"]
-position = Vector2(640, 360)
-shape = SubResource("RectangleShape2D_1lhri")
 
 [node name="Wall" type="StaticBody2D" parent="."]
 
@@ -73,8 +55,19 @@ offset_top = 360.0
 offset_right = 640.0
 offset_bottom = 360.0
 
-[connection signal="body_entered" from="SpeedCheck" to="." method="_on_speed_check_body_entered"]
+[node name="Player1" parent="." instance=ExtResource("4_vvwy1")]
+position = Vector2(10, 307)
+player_id = 1
+
+[node name="Player2" parent="." instance=ExtResource("4_vvwy1")]
+position = Vector2(1270, 455)
+player_id = 2
+
 [connection signal="body_entered" from="LeftGoalZone" to="." method="_on_left_goal_zone_body_entered"]
 [connection signal="body_entered" from="RightGoalZone" to="." method="_on_right_goal_zone_body_entered"]
 [connection signal="countdown_finished" from="UI" to="." method="_on_ui_countdown_finished"]
 [connection signal="start_button_pressed" from="UI" to="." method="_on_ui_start_button_pressed"]
+[connection signal="hold_key_pressed" from="Player1" to="." method="_on_player_1_hold_key_pressed"]
+[connection signal="hold_key_released" from="Player1" to="." method="_on_player_1_hold_key_released"]
+[connection signal="hold_key_pressed" from="Player2" to="." method="_on_player_2_hold_key_pressed"]
+[connection signal="hold_key_released" from="Player2" to="." method="_on_player_2_hold_key_released"]

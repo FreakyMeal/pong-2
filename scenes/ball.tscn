@@ -9,6 +9,9 @@ radius = 23.0217
 [node name="Ball" type="RigidBody2D"]
 gravity_scale = 0.0
 script = ExtResource("1_b54up")
+speed = 800.0
+acceleration = 1.1
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.46, 0.46)

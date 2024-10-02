@@ -28,12 +28,12 @@ func _on_start_button_pressed() -> void:
 
 func start_countdown():
 	$StartTimer.show()
-	$StartTimer.text = "3"
-	await get_tree().create_timer(0.6).timeout
-	$StartTimer.text = "2"
-	await get_tree().create_timer(0.6).timeout
-	$StartTimer.text = "1"
-	await get_tree().create_timer(0.6).timeout
+	var timer_count:int = 3
+	for i in timer_count:
+		$StartTimer.text = str(timer_count)
+		await get_tree().create_timer(0.6).timeout
+		timer_count -= 1
+	
 	$StartTimer.text = "Go!"
 	await get_tree().create_timer(0.3).timeout
 	$StartTimer.hide()
