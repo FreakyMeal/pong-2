@@ -165,6 +165,7 @@ theme = ExtResource("2_r0r0r")
 text = "HOLD"
 
 [node name="HoldP2" type="Label" parent="Keys"]
+layout_mode = 0
 offset_left = 529.0
 offset_top = 278.0
 offset_right = 571.0
