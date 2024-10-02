@@ -21,10 +21,7 @@ func _on_start_button_pressed() -> void:
 	start_button_pressed.emit()
 	$StartButton.hide()
 	$TextDisplay.hide()
-	$SpriteZ.hide()
-	$SpriteS.hide()
-	$SpriteUP.hide()
-	$SpriteDOWN.hide()
+	$Keys.hide()
 
 func start_countdown():
 	$StartTimer.show()

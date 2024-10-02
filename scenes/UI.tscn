@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6747rmads7nb"]
+[gd_scene load_steps=9 format=3 uid="uid://c6747rmads7nb"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_tmvy3"]
 [ext_resource type="Texture2D" uid="uid://byndgvj7eofy7" path="res://assets/keyboard_key_z.png" id="2_d3oyi"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bklfv1jkygeuc" path="res://assets/keyboard_key_s.png" id="3_xiggw"]
 [ext_resource type="Texture2D" uid="uid://n3rs8612wpyt" path="res://assets/keyboard_key_up.png" id="4_0ro36"]
 [ext_resource type="Texture2D" uid="uid://bggymclfyokfu" path="res://assets/keyboard_key_down.png" id="5_ox7fh"]
+[ext_resource type="Texture2D" uid="uid://ces2uaqabujhy" path="res://assets/keyboard_key_d.png" id="7_plvu6"]
+[ext_resource type="Texture2D" uid="uid://bo4h41gcrqif4" path="res://assets/keyboard_key_0.png" id="8_lggc0"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -118,24 +120,56 @@ text = "Text display"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpriteZ" type="Sprite2D" parent="."]
-position = Vector2(-550, 166)
+[node name="Keys" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SpriteZ" type="Sprite2D" parent="Keys"]
+position = Vector2(-550, 71.6)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_d3oyi")
 
-[node name="SpriteS" type="Sprite2D" parent="."]
-position = Vector2(-550, 230)
+[node name="SpriteS" type="Sprite2D" parent="Keys"]
+position = Vector2(-550, 153.6)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_xiggw")
 
-[node name="SpriteUP" type="Sprite2D" parent="."]
-position = Vector2(550, 166)
+[node name="SpriteUP" type="Sprite2D" parent="Keys"]
+position = Vector2(550, 71.6)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("4_0ro36")
 
-[node name="SpriteDOWN" type="Sprite2D" parent="."]
-position = Vector2(550, 230)
+[node name="SpriteDOWN" type="Sprite2D" parent="Keys"]
+position = Vector2(550, 153.6)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("5_ox7fh")
+
+[node name="SpriteD" type="Sprite2D" parent="Keys"]
+position = Vector2(-550, 250)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("7_plvu6")
+
+[node name="Sprite0" type="Sprite2D" parent="Keys"]
+position = Vector2(550, 250)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("8_lggc0")
+
+[node name="HoldP1" type="Label" parent="Keys"]
+layout_mode = 0
+offset_left = -571.0
+offset_top = 278.0
+offset_right = -529.0
+offset_bottom = 301.0
+theme = ExtResource("2_r0r0r")
+text = "HOLD"
+
+[node name="HoldP2" type="Label" parent="Keys"]
+offset_left = 529.0
+offset_top = 278.0
+offset_right = 571.0
+offset_bottom = 301.0
+theme = ExtResource("2_r0r0r")
+text = "HOLD"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
