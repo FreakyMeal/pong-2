@@ -37,12 +37,12 @@ func reset_position():
 
 func hold(player: Node2D):
 	is_held = true
-	$AnimationPlayer.play("held")
+	$BallAnimation.play("held")
 	player_holding = player
 
 func release():
 	is_held = false
-	$AnimationPlayer.stop()
+	$BallAnimation.stop()
 	player_holding = null
 
 # Check if ball is near a player

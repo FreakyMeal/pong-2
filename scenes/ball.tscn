@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8uw1tqvekdhu"]
+[gd_scene load_steps=10 format=3 uid="uid://b8uw1tqvekdhu"]
 
 [ext_resource type="Script" path="res://scripts/ball.gd" id="1_b54up"]
 [ext_resource type="Texture2D" uid="uid://dkik4hu6pfyk2" path="res://assets/ball.png" id="2_tfbij"]
+[ext_resource type="Script" path="res://scripts/trail.gd" id="3_nimiw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vvil2"]
 radius = 23.0217
@@ -45,6 +46,13 @@ _data = {
 "held": SubResource("Animation_glxpe")
 }
 
+[sub_resource type="Curve" id="Curve_fgjyx"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_u5lx0"]
+colors = PackedColorArray(0, 0, 0, 0, 0.756863, 1, 1, 1)
+
 [node name="Ball" type="RigidBody2D"]
 gravity_scale = 0.0
 script = ExtResource("1_b54up")
@@ -59,7 +67,15 @@ texture = ExtResource("2_tfbij")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vvil2")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="BallAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_j31up")
 }
+
+[node name="Trail" type="Line2D" parent="."]
+show_behind_parent = true
+width = 40.0
+width_curve = SubResource("Curve_fgjyx")
+gradient = SubResource("Gradient_u5lx0")
+script = ExtResource("3_nimiw")
+length = 10
