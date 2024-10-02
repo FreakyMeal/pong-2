@@ -6,7 +6,7 @@ var direction := Vector2.ZERO
 
 var is_held:bool = false
 var player_holding: Node2D = null
-var hold_distance: float = 60.0
+@export var hold_distance: float = 60.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,7 +29,8 @@ func _physics_process(delta: float) -> void:
 
 # Ball starts with a random horizontal-ish direction
 func move():
-	direction = Vector2(randf_range(-1, 1), randf_range(-0.2, 0.2)).normalized()
+	var x = [-1,1].pick_random() # Pick a random left or right start direction
+	direction = Vector2(x, randf_range(-0.5, 0.5)).normalized()
 
 func reset_position():
 	position = Vector2(640, 360)  # Field center

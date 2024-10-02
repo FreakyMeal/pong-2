@@ -1,12 +1,12 @@
 extends CharacterBody2D
 
 @export var player_id:int = 0
-@export var speed:int = 400
+@export var speed:int = 500
 var direction: = Vector2.ZERO
 
-var up_key:String = ""
-var down_key:String = ""
-var hold_key:String = ""
+@export var up_key:String = ""
+@export var down_key:String = ""
+@export var hold_key:String = ""
 
 var is_holding_ball:bool = false
 

@@ -72,9 +72,9 @@ func _on_player_2_hold_key_pressed() -> void:
 		ball.hold($Player2)
 
 func _on_player_1_hold_key_released() -> void:
-	if is_instance_valid(ball):
+	if is_instance_valid(ball) and ball.player_holding == $Player1:
 		ball.release()
 
 func _on_player_2_hold_key_released() -> void:
-	if is_instance_valid(ball):
+	if is_instance_valid(ball) and ball.player_holding == $Player2:
 		ball.release()

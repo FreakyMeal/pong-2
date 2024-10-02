@@ -6,10 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://c6747rmads7nb" path="res://scenes/UI.tscn" id="4_xw2bl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xudry"]
-size = Vector2(12.8, 20)
+size = Vector2(12.8, 108)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lepwk"]
-size = Vector2(10.6667, 40)
+size = Vector2(10.6667, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c07i3"]
 size = Vector2(40, 720)
@@ -28,12 +28,12 @@ flip_h = true
 [node name="Wall" type="StaticBody2D" parent="."]
 
 [node name="WallCollisionTop" type="CollisionShape2D" parent="Wall"]
-position = Vector2(640, -10)
+position = Vector2(640, -54)
 scale = Vector2(100, 1)
 shape = SubResource("RectangleShape2D_xudry")
 
 [node name="WallCollisionBottom" type="CollisionShape2D" parent="Wall"]
-position = Vector2(640, 740)
+position = Vector2(640, 770)
 scale = Vector2(120, 1)
 shape = SubResource("RectangleShape2D_lepwk")
 
