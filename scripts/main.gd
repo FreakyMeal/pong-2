@@ -12,7 +12,7 @@ func _process(_delta: float) -> void:
 func reset():
 	reset_score()
 	$UI/TextDisplay.show()
-	$UI/TextDisplay.text = "First to 5 wins"
+	$UI/TextDisplay.text = "FIRST TO 5 WINS"
 
 func reset_score():
 	$UI.p1_score = 0

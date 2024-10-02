@@ -21,6 +21,9 @@ func _on_start_button_pressed() -> void:
 	start_button_pressed.emit()
 	$StartButton.hide()
 	$TextDisplay.hide()
+	$Logo.hide()
+	$P1Score.show()
+	$P2Score.show()
 	$Keys.hide()
 
 func start_countdown():
