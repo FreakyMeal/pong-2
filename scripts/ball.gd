@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+class_name Ball
+
 @onready var starting_speed:float = 500.0
 @onready var speed:float = 500.0
 @onready var max_speed:float = 3000.0
