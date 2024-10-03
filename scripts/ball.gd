@@ -23,8 +23,9 @@ func _physics_process(delta: float) -> void:
 			var collider = collision.get_collider()
 			direction = direction.bounce(collision.get_normal())
 			
-			if collider.is_in_group("players") and speed < max_speed: speed *= acceleration
-			elif collider.is_in_group("players"): speed = max_speed
+			if collider.is_in_group("players"):
+				if speed < max_speed: speed *= acceleration
+				else: speed = max_speed
 	else:
 		update_held_position()
 
