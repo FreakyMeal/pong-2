@@ -46,7 +46,7 @@ func _on_left_goal_zone_body_entered(body: Ball) -> void:
 
 func _on_right_goal_zone_body_entered(body: Ball) -> void:
 	$UI.p1_score += 1
-	
+
 	ball.queue_free()
 		
 	if $UI.p1_score >= 5:
@@ -58,9 +58,9 @@ func _on_right_goal_zone_body_entered(body: Ball) -> void:
 		$UI/StartButton.show()
 
 	else:
-			await get_tree().create_timer(0.6).timeout
+		await get_tree().create_timer(0.6).timeout
 
-			$UI.start_countdown()
+		$UI.start_countdown()
 
 func _on_ui_start_button_pressed() -> void:
 	reset_score()
