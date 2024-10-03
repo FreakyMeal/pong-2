@@ -16,7 +16,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	print(speed)
 	if not is_held:
 		var collision = move_and_collide(direction * speed * delta)
 		
@@ -50,6 +49,9 @@ func release():
 	is_held = false
 	$BallAnimation.stop()
 	player_holding = null
+	
+	# Send the ball back without colliding with the player. Tweak necessary to prevent holding ball after it collided
+	direction.x *= -1
 
 # Check if ball is near a player
 func is_near_player(player: Node2D) -> bool:

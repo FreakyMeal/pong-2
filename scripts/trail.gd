@@ -11,7 +11,7 @@ var point: = Vector2()
 func _process(_delta: float) -> void:
 	global_position = Vector2(0,0)
 	
-	point = get_parent().position
+	point = $"..".position
 	
 	add_point(point)
 	
