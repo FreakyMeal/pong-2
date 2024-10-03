@@ -1,6 +1,8 @@
 extends RigidBody2D
 
+@export var starting_speed:float = 500.0
 @export var speed:float = 500.0
+@export var max_speed:float = 3000.0
 @export var acceleration:float = 1.05
 var direction := Vector2.ZERO
 
@@ -14,6 +16,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	print(speed)
 	if not is_held:
 		var collision = move_and_collide(direction * speed * delta)
 		
@@ -21,14 +24,17 @@ func _physics_process(delta: float) -> void:
 			var collider = collision.get_collider()
 			direction = direction.bounce(collision.get_normal())
 			
-			if collider.is_in_group("players"):
+			if collider.is_in_group("players") and speed < max_speed:
 				speed *= acceleration
+			elif collider.is_in_group("players"):
+				speed = max_speed
 	else:
 		update_held_position()
 
 
 # Ball starts with a random horizontal-ish direction
 func move():
+	speed = starting_speed
 	var x = [-1,1].pick_random() # Pick a random left or right start direction
 	direction = Vector2(x, randf_range(-0.5, 0.5)).normalized()
 

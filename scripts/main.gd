@@ -1,6 +1,6 @@
 extends Node2D
 
-var ball_scene: PackedScene = preload("res://scenes/ball.tscn")
+@onready var ball_scene: PackedScene = preload("res://scenes/ball.tscn")
 var ball = null
 
 func _ready() -> void:

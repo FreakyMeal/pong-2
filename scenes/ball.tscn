@@ -50,13 +50,13 @@ _data = {
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Gradient" id="Gradient_u5lx0"]
+[sub_resource type="Gradient" id="Gradient_a77se"]
 colors = PackedColorArray(0, 0, 0, 0, 0.756863, 1, 1, 1)
 
 [node name="Ball" type="RigidBody2D"]
 gravity_scale = 0.0
 script = ExtResource("1_b54up")
-speed = 800.0
+max_speed = 800.0
 acceleration = 1.1
 metadata/_edit_group_ = true
 
@@ -76,6 +76,8 @@ libraries = {
 show_behind_parent = true
 width = 40.0
 width_curve = SubResource("Curve_fgjyx")
-gradient = SubResource("Gradient_u5lx0")
+gradient = SubResource("Gradient_a77se")
 script = ExtResource("3_nimiw")
 length = 10
+color_slow = Color(1, 0.09, 0.09, 1)
+color_fast = Color(0.756863, 1, 1, 1)
