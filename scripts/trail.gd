@@ -1,7 +1,7 @@
 extends Line2D
 
 @export var length:int = 50
-var point: = Vector2()
+var point := Vector2()
 
 @export var color_slow:Color
 @export var color_fast:Color
@@ -15,8 +15,7 @@ func _process(_delta: float) -> void:
 	
 	add_point(point)
 	
-	while get_point_count() > length:
-		remove_point(0)
+	while get_point_count() > length: remove_point(0)
 	
 	update_trail_color()
 
