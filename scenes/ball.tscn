@@ -56,7 +56,7 @@ colors = PackedColorArray(0, 0, 0, 0, 0.756863, 1, 1, 1)
 [node name="Ball" type="RigidBody2D"]
 gravity_scale = 0.0
 script = ExtResource("1_b54up")
-max_speed = 800.0
+max_speed = 2500.0
 acceleration = 1.1
 metadata/_edit_group_ = true
 
@@ -79,5 +79,5 @@ width_curve = SubResource("Curve_fgjyx")
 gradient = SubResource("Gradient_a77se")
 script = ExtResource("3_nimiw")
 length = 10
-color_slow = Color(1, 0.09, 0.09, 1)
+color_slow = Color(1, 1, 1, 1)
 color_fast = Color(0.756863, 1, 1, 1)
