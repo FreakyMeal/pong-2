@@ -46,6 +46,7 @@ func _on_left_goal_zone_body_entered(body: Ball) -> void:
 
 func _on_right_goal_zone_body_entered(body: Ball) -> void:
 	$UI.p1_score += 1
+	
 	ball.queue_free()
 		
 	if $UI.p1_score >= 5:
