@@ -8,7 +8,7 @@ extends RigidBody2D
 
 var direction: Vector2 = Vector2.ZERO
 var is_held:bool = false
-var player_holding: Node2D = null # Gotta change from Node2D to Player
+var player_holding: Player = null # Gotta change from Node2D to Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
