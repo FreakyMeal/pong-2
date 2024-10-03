@@ -24,11 +24,9 @@ func _physics_process(delta: float) -> void:
 			direction = direction.bounce(collision.get_normal())
 			
 			if collider.is_in_group("players"):
-				if speed < max_speed: speed *= acceleration
-				else: speed = max_speed
-	else:
-		update_held_position()
+				speed = speed * acceleration if speed < max_speed else max_speed
 
+	else: update_held_position()
 
 # Ball starts with a random horizontal-ish direction
 func move():
