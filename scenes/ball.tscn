@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b8uw1tqvekdhu"]
+[gd_scene load_steps=11 format=3 uid="uid://b8uw1tqvekdhu"]
 
 [ext_resource type="Script" path="res://scripts/ball.gd" id="1_b54up"]
 [ext_resource type="Texture2D" uid="uid://dkik4hu6pfyk2" path="res://assets/ball.png" id="2_tfbij"]
 [ext_resource type="Script" path="res://scripts/trail.gd" id="3_nimiw"]
+[ext_resource type="Script" path="res://scripts/power_gauge.gd" id="4_er1te"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vvil2"]
 radius = 23.0217
@@ -56,7 +57,6 @@ colors = PackedColorArray(0, 0, 0, 0, 0.756863, 1, 1, 1)
 [node name="Ball" type="RigidBody2D"]
 gravity_scale = 0.0
 script = ExtResource("1_b54up")
-metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.46, 0.46)
@@ -79,3 +79,17 @@ script = ExtResource("3_nimiw")
 length = 10
 color_slow = Color(1, 1, 1, 1)
 color_fast = Color(0.756863, 1, 1, 1)
+
+[node name="PowerGauge" type="ProgressBar" parent="."]
+visible = false
+offset_left = -59.0
+offset_top = 29.0
+offset_right = 59.0
+offset_bottom = 56.0
+script = ExtResource("4_er1te")
+fill_rate = 150
+
+[node name="FillRate" type="Timer" parent="PowerGauge"]
+wait_time = 0.05
+
+[connection signal="timeout" from="PowerGauge/FillRate" to="PowerGauge" method="_on_fill_rate_timeout"]

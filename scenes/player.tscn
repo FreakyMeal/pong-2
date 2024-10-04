@@ -9,7 +9,6 @@ height = 150.0
 motion_mode = 1
 script = ExtResource("1_xf3o8")
 speed = 600
-metadata/_edit_group_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 8

@@ -13,13 +13,13 @@ var can_be_held:bool = true
 var player_holding: Node2D = null
 @export var hold_distance: float = 60.0
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	reset_position()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	print(can_be_held)
 	if not is_held:
 		var collision = move_and_collide(direction * speed * delta)
 		
@@ -50,13 +50,18 @@ func reset_position():
 func hold(player: Player):
 	if can_be_held:
 		is_held = true
-		$BallAnimation.play("held")
 		player_holding = player
+		$BallAnimation.play("held")
+		$PowerGauge.show()
 
 func release():
 	is_held = false
 	$BallAnimation.stop()
 	player_holding = null
+	$PowerGauge.hide()
+	if $PowerGauge.value == 100:
+		speed *= 1.5
+	$PowerGauge.value = 0
 	
 	# Send the ball back without colliding with the player
 	direction.x *= -1
