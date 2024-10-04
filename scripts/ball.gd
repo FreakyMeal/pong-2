@@ -1,12 +1,16 @@
 extends RigidBody2D
 
-@export var speed:float = 500.0
-@export var acceleration:float = 1.05
-var direction := Vector2.ZERO
+class_name Ball
 
+@onready var starting_speed:float = 500.0
+@onready var speed:float = 500.0
+@onready var max_speed:float = 3000.0
+@onready var acceleration:float = 1.05
+@onready var hold_distance: float = 60.0
+
+var direction: Vector2 = Vector2.ZERO
 var is_held:bool = false
-var player_holding: Node2D = null
-var hold_distance: float = 60.0
+var player_holding: Player = null # Gotta change from Node2D to Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,33 +26,38 @@ func _physics_process(delta: float) -> void:
 			direction = direction.bounce(collision.get_normal())
 			
 			if collider.is_in_group("players"):
-				speed *= acceleration
-	else:
-		update_held_position()
+				speed = speed * acceleration if speed < max_speed else max_speed
 
+	else: update_held_position()
 
 # Ball starts with a random horizontal-ish direction
 func move():
-	direction = Vector2(randf_range(-1, 1), randf_range(-0.2, 0.2)).normalized()
+	speed = starting_speed
+
+	var x = [-1,1].pick_random() # Pick a random left or right start direction
+	direction = Vector2(x, randf_range(-0.5, 0.5)).normalized()
 
 func reset_position():
 	position = Vector2(640, 360)  # Field center
 
 func hold(player: Node2D):
 	is_held = true
+	$BallAnimation.play("held")
 	player_holding = player
 
 func release():
 	is_held = false
+	$BallAnimation.stop()
 	player_holding = null
+	
+	# Send the ball back without colliding with the player. Tweak necessary to prevent holding ball after it collided
+	direction.x *= -1
 
 # Check if ball is near a player
 func is_near_player(player: Node2D) -> bool:
 	return position.distance_to(player.position) < hold_distance
 
 func update_held_position():
-	if player_holding.name == "Player1":
-		position = player_holding.position + Vector2(hold_distance,0)
-	if player_holding.name == "Player2":
-		position = player_holding.position - Vector2(hold_distance,0)
+	if player_holding.name == "Player1": position = player_holding.position + Vector2(hold_distance,0)
+	if player_holding.name == "Player2": position = player_holding.position - Vector2(hold_distance,0)
 		

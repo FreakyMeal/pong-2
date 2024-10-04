@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c6747rmads7nb"]
+[gd_scene load_steps=13 format=3 uid="uid://c6747rmads7nb"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_tmvy3"]
 [ext_resource type="Texture2D" uid="uid://byndgvj7eofy7" path="res://assets/keyboard_key_z.png" id="2_d3oyi"]
@@ -8,6 +8,46 @@
 [ext_resource type="Texture2D" uid="uid://bggymclfyokfu" path="res://assets/keyboard_key_down.png" id="5_ox7fh"]
 [ext_resource type="Texture2D" uid="uid://ces2uaqabujhy" path="res://assets/keyboard_key_d.png" id="7_plvu6"]
 [ext_resource type="Texture2D" uid="uid://bo4h41gcrqif4" path="res://assets/keyboard_key_0.png" id="8_lggc0"]
+[ext_resource type="Texture2D" uid="uid://ij7foo005emd" path="res://assets/logo.png" id="9_xeqwq"]
+
+[sub_resource type="Animation" id="Animation_wtc33"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -75)]
+}
+
+[sub_resource type="Animation" id="Animation_uljs2"]
+resource_name = "float"
+length = 8.0
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, -75), Vector2(0, -100)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6wp7w"]
+_data = {
+"RESET": SubResource("Animation_wtc33"),
+"float": SubResource("Animation_uljs2")
+}
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -23,6 +63,7 @@ size_flags_vertical = 4
 script = ExtResource("1_tmvy3")
 
 [node name="P1Score" type="Label" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.137255)
 layout_mode = 1
 anchors_preset = 6
@@ -43,6 +84,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="P2Score" type="Label" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.137255)
 layout_mode = 1
 anchors_preset = 4
@@ -101,21 +143,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TextDisplay" type="Label" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -307.0
-offset_top = -321.0
-offset_right = 308.0
-offset_bottom = -184.0
+offset_left = -53.0
+offset_top = 266.0
+offset_right = 55.0
+offset_bottom = 290.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_r0r0r")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 20
 text = "Text display"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -165,11 +206,23 @@ theme = ExtResource("2_r0r0r")
 text = "HOLD"
 
 [node name="HoldP2" type="Label" parent="Keys"]
+layout_mode = 0
 offset_left = 529.0
 offset_top = 278.0
 offset_right = 571.0
 offset_bottom = 301.0
 theme = ExtResource("2_r0r0r")
 text = "HOLD"
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(0, -75)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_xeqwq")
+
+[node name="LogoAnimation" type="AnimationPlayer" parent="Logo"]
+libraries = {
+"": SubResource("AnimationLibrary_6wp7w")
+}
+autoplay = "float"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
