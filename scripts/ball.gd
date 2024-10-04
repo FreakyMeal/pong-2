@@ -1,12 +1,15 @@
 extends RigidBody2D
 
-@export var starting_speed:float = 500.0
-@export var speed:float = 500.0
-@export var max_speed:float = 3000.0
+class_name Ball
+
+@export var starting_speed:float = 800.0
+@export var speed:float = 800.0
+@export var max_speed:float = 1800.0
 @export var acceleration:float = 1.05
 var direction := Vector2.ZERO
 
 var is_held:bool = false
+var can_be_held:bool = true
 var player_holding: Node2D = null
 @export var hold_distance: float = 60.0
 
@@ -16,6 +19,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	print(can_be_held)
 	if not is_held:
 		var collision = move_and_collide(direction * speed * delta)
 		
@@ -23,10 +27,13 @@ func _physics_process(delta: float) -> void:
 			var collider = collision.get_collider()
 			direction = direction.bounce(collision.get_normal())
 			
-			if collider.is_in_group("players") and speed < max_speed:
-				speed *= acceleration
-			elif collider.is_in_group("players"):
-				speed = max_speed
+			if collider.is_in_group("players"):
+				speed = speed * acceleration if speed < max_speed else max_speed
+				
+				# Ball cannot be held immediately after colliding with a player (not the optimal way to do this)
+				can_be_held = false
+				await get_tree().create_timer(0.5).timeout
+				can_be_held = true
 	else:
 		update_held_position()
 
@@ -40,21 +47,24 @@ func move():
 func reset_position():
 	position = Vector2(640, 360)  # Field center
 
-func hold(player: Node2D):
-	is_held = true
-	$BallAnimation.play("held")
-	player_holding = player
+func hold(player: Player):
+	if can_be_held:
+		is_held = true
+		$BallAnimation.play("held")
+		player_holding = player
 
 func release():
 	is_held = false
 	$BallAnimation.stop()
 	player_holding = null
 	
-	# Send the ball back without colliding with the player. Tweak necessary to prevent holding ball after it collided
+	# Send the ball back without colliding with the player
 	direction.x *= -1
+	
+	can_be_held = true
 
 # Check if ball is near a player
-func is_near_player(player: Node2D) -> bool:
+func is_near_player(player: Player) -> bool:
 	return position.distance_to(player.position) < hold_distance
 
 func update_held_position():

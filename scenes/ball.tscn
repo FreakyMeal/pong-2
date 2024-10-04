@@ -56,8 +56,6 @@ colors = PackedColorArray(0, 0, 0, 0, 0.756863, 1, 1, 1)
 [node name="Ball" type="RigidBody2D"]
 gravity_scale = 0.0
 script = ExtResource("1_b54up")
-max_speed = 1800.0
-acceleration = 1.1
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
